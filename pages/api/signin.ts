@@ -7,11 +7,12 @@ import {NextApiRequest, NextApiResponse} from 'next'
 
 export default async(req:NextApiRequest, res:NextApiResponse) => {
     const {email, password} = req.body
+
     const user = await prisma.user.findUnique({
-        where:{
-            email,
-        }
-    })
+        where: {
+          email:email,
+        },
+      })
 
     if( user && bcrypt.compareSync(password, user.password)){
         const token = jwt.sign({
@@ -19,7 +20,7 @@ export default async(req:NextApiRequest, res:NextApiResponse) => {
             id: user.id,
             time: Date.now(),
         },'secretKey',
-        {expiresIn: '8h'})
+        {expiresIn: '8h',})
 
 
 
