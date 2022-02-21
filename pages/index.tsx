@@ -1,12 +1,15 @@
 import { Box, Flex, Text } from '@chakra-ui/layout'
 import Head from 'next/head'
-// import Image from 'next/image'
 import { Image } from '@chakra-ui/react'
-
+import {useMe} from '../lib/hooks'
 // import styles from '../styles/Home.module.css'
 import GradientLayout from '../components/gradientLayout'
 import prisma from '../lib/prisma'
 const Home = ({artists}) => {
+  
+  const {user} = useMe()
+  
+  
   return (
     <GradientLayout 
       roundImage
